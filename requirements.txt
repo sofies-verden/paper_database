@@ -1,0 +1,11 @@
+# Paper Database - Python Requirements
+# This project uses only Python standard library
+# Python 3.7 or higher is required
+
+# No external dependencies required for core functionality
+
+# Optional dependencies for future enhancements:
+# requests>=2.28.0  # For fetching paper metadata from APIs
+# beautifulsoup4>=4.11.0  # For web scraping
+# bibtexparser>=1.4.0  # For BibTeX import/export
+# pypdf2>=3.0.0  # For PDF metadata extraction
