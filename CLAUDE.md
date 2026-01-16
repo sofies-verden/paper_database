@@ -245,42 +245,52 @@ npm run add-papers -- --enrich --tags "LLM" research.md  # メタデータ取得
 
 ---
 
-## Phase 4: UI拡張と表示改善
+## Phase 4: UI拡張と表示改善 ✅ 完了
 **目標**: 取得したメタデータをUIで活用
 
-### Tasks
-1. **PaperCard.tsx 拡張**
+### 完了したタスク
+1. ✅ **PaperCard.tsx 拡張**
    - ステータスバッジ表示 (to-read: 青, reading: 黄, read: 緑, posted: 紫)
-   - 被引用数バッジ (Quote アイコン付き、条件表示)
+   - 被引用数バッジ (Quote アイコン付き、K/M形式で表示)
+   - 影響力のある引用数 (括弧内に表示)
    - ジャーナル/カンファレンス表示 (BookOpen アイコン)
-   - DOIリンク表示 (オプション)
+   - h-index、2yr citedness 表示
 
-2. **Sidebar.tsx 拡張**
-   - ステータスフィルターセクション追加
+2. ✅ **Sidebar.tsx 拡張**
+   - ステータスフィルターセクション追加 (アイコン付き)
    - ステータス別件数表示
+   - フィルタークリア機能
 
-3. **App.tsx 拡張**
-   - ソートオプション追加 (被引用数順、出版日順、追加日順)
+3. ✅ **App.tsx 拡張**
+   - ソートドロップダウン追加
+     - 出版年（新しい/古い順）
+     - 被引用数（多い/少ない順）
+     - 追加日（新しい/古い順）
    - ステータスフィルターstate管理
+   - レスポンシブ対応（モバイル用短縮表示）
 
-4. **統計ダッシュボード** (オプション)
+4. **統計ダッシュボード** (未実装 - オプション)
    - 総論文数
    - ステータス別グラフ
    - タグ分布
 
-### 現在のUIコンポーネント構成
+### 実装したUIコンポーネント構成
 ```
 src/components/
-├── PaperCard.tsx   # 論文カード (Calendar, Users, ExternalLink, ChevronDown/Up)
+├── PaperCard.tsx   # 論文カード (Calendar, Users, Quote, BookOpen, Clock, BookMarked, CheckCircle, Share2)
 ├── SearchBar.tsx   # 検索バー (Search)
-└── Sidebar.tsx     # タグフィルター (Tag, X)
+└── Sidebar.tsx     # フィルター (Filter, Tag, Clock, BookMarked, CheckCircle, Share2)
 ```
 
-### 追加予定のLucide Reactアイコン
-- `Quote`: 被引用数用
-- `BookOpen`: ジャーナル/会議用
-- `Clock` / `BookMarked` / `CheckCircle` / `Share2`: ステータス用
-- `SortAsc` / `SortDesc`: ソート用
+### 使用したLucide Reactアイコン
+- `Quote`: 被引用数
+- `BookOpen`: ジャーナル/会議
+- `Clock`: 未読ステータス
+- `BookMarked`: 読書中ステータス
+- `CheckCircle`: 読了ステータス
+- `Share2`: 投稿済ステータス
+- `Filter`: フィルターセクション
+- `ArrowUpDown`, `ChevronDown`: ソートUI
 
 ### Dependencies
 - Phase 1, 2 (メタデータが必要) ✅
