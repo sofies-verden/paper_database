@@ -10,8 +10,10 @@ interface PaperCardProps {
 export function PaperCard({ paper, onTagClick }: PaperCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const summaryPreview = paper.summary.slice(0, 100);
-  const hasMoreContent = paper.summary.length > 100;
+  // Use abstract with fallback to summary for backward compatibility
+  const content = paper.abstract ?? paper.summary ?? '';
+  const summaryPreview = content.slice(0, 100);
+  const hasMoreContent = content.length > 100;
 
   const handleCardClick = () => {
     if (hasMoreContent) {
@@ -42,7 +44,7 @@ export function PaperCard({ paper, onTagClick }: PaperCardProps) {
       <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-3">
         <div className="flex items-center gap-1">
           <Calendar className="w-4 h-4" />
-          <span>{paper.publishedDate}</span>
+          <span>{paper.year}</span>
         </div>
         <div className="flex items-center gap-1">
           <Users className="w-4 h-4" />
@@ -63,7 +65,7 @@ export function PaperCard({ paper, onTagClick }: PaperCardProps) {
       </div>
 
       <p className="text-gray-600 text-sm leading-relaxed mb-3">
-        {isExpanded ? paper.summary : summaryPreview}
+        {isExpanded ? content : summaryPreview}
         {!isExpanded && hasMoreContent && '...'}
       </p>
 

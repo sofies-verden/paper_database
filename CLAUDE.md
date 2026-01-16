@@ -41,47 +41,57 @@ paper_database/
 
 ## Data Schema
 
-### Current Paper Type (src/types.ts)
+### Paper Type (src/types.ts) - Phase 1 完了
 ```typescript
+// 読書ステータス
+type ReadingStatus = 'to-read' | 'reading' | 'read' | 'posted';
+
+// ジャーナル/会議情報
+interface Journal {
+  name: string;
+  issn?: string;
+  hIndex?: number;
+  twoYearCitedness?: number;  // IF代替指標
+}
+
+// 論文データ型
 interface Paper {
+  // 基本情報
   id: string;
   title: string;
-  summary: string;
-  tags: string[];
-  publishedDate: string;  // "YYYY-MM-DD"
-  url: string;            // arXiv URL等
   authors: string[];
+  year: number;
+  doi?: string;
+  url?: string;
+  abstract?: string;
+
+  // タグ・カテゴリ
+  tags: string[];
+
+  // 読書管理
+  status: ReadingStatus;
+  addedDate: string;      // ISO 8601 (YYYY-MM-DD)
+  readDate?: string;      // ISO 8601
+
+  // 引用メタデータ
+  citationCount?: number;
+  influentialCitations?: number;
+  journal?: Journal;
+
+  // ツイート管理
+  tweetDraft?: string;
+  tweetedAt?: string;
+
+  // 後方互換性 (deprecated)
+  summary?: string;        // Use abstract instead
+  publishedDate?: string;  // Use year instead
 }
 ```
 
-### Extended Paper Type (実装予定)
+### 移行関数
 ```typescript
-type ReadingStatus = 'to-read' | 'reading' | 'read' | 'posted';
-
-interface ExtendedPaper extends Paper {
-  // 識別子
-  doi?: string;                    // DOI (例: "10.48550/arXiv.1706.03762")
-  arxivId?: string;                // arXiv ID (例: "1706.03762")
-
-  // 読書管理
-  status: ReadingStatus;           // 読書ステータス
-  addedDate: string;               // データベース追加日
-  readDate?: string;               // 読了日
-
-  // メタデータ (API取得)
-  citationCount?: number;          // 被引用数 (Semantic Scholar)
-  influentialCitationCount?: number; // 影響力のある引用数 (Semantic Scholar)
-  venue?: string;                  // 掲載ジャーナル/カンファレンス
-  year?: number;                   // 出版年
-
-  // OpenAlex指標
-  openalexId?: string;             // OpenAlex ID
-  citedByCount2Year?: number;      // 過去2年の被引用数 (IF代替)
-  hIndex?: number;                 // 著者のh-index平均
-
-  // インポート元
-  source?: 'manual' | 'deep-research' | 'api';
-}
+// 後方互換性ヘルパー: 旧データを新形式に変換
+function migratePaper(oldPaper: Partial<Paper>): Paper
 ```
 
 ## Architecture Rules
@@ -113,25 +123,28 @@ npm run preview  # ビルド結果プレビュー
 
 # Implementation Plan
 
-## Phase 1: データスキーマ拡張と読書管理機能
+## Phase 1: データスキーマ拡張と読書管理機能 ✅ 完了
 **目標**: 基本的な読書ステータス管理をUIに追加
 
-### Tasks
-1. **types.ts の拡張**
+### 完了したタスク
+1. ✅ **types.ts の拡張**
    - `ReadingStatus` 型の追加
-   - `ExtendedPaper` 型の定義 (後方互換性維持)
+   - `Journal` 型の追加
+   - `Paper` 型の完全再定義 (後方互換性維持)
+   - `migratePaper()` ヘルパー関数追加
 
-2. **data.json のスキーマ移行**
-   - 既存データに `status: 'read'`, `addedDate` を追加
-   - 移行スクリプト作成 (Node.js CLI)
+2. ✅ **data.json のスキーマ移行**
+   - 既存6件に新フィールド追加 (`status`, `addedDate`, `year`, `doi`, `abstract`, `citationCount`, `influentialCitations`, `journal`)
+   - サンプルデータ1件追加 (Chain-of-Thought論文、`status: 'to-read'`)
 
-3. **PaperCard.tsx の更新**
-   - ステータスバッジ表示
-   - 被引用数・ジャーナル情報の表示領域追加
+3. ✅ **コンポーネント互換性対応**
+   - `App.tsx`: `year` ベースのソートに変更、検索キーに `abstract` 追加
+   - `PaperCard.tsx`: `abstract` 優先表示、`year` 表示
 
-4. **Sidebar.tsx の更新**
-   - ステータスフィルター追加 ('to-read', 'reading', 'read', 'posted')
-   - 未読件数バッジ
+### 未実装 (Phase 4で実装予定)
+- ステータスバッジ表示
+- 被引用数・ジャーナル情報の表示
+- Sidebar.tsxのステータスフィルター
 
 ### Dependencies
 - なし (独立して実装可能)

@@ -18,7 +18,7 @@ function App() {
       .then((res) => res.json())
       .then((data: Paper[]) => {
         const sorted = [...data].sort(
-          (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+          (a, b) => b.year - a.year || b.addedDate.localeCompare(a.addedDate)
         );
         setPapers(sorted);
         setLoading(false);
@@ -31,7 +31,7 @@ function App() {
 
   const fuse = useMemo(() => {
     return new Fuse(papers, {
-      keys: ['title', 'summary', 'tags', 'authors'],
+      keys: ['title', 'abstract', 'summary', 'tags', 'authors'],
       threshold: 0.4,
       ignoreLocation: true,
     });
