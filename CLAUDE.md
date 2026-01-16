@@ -20,17 +20,22 @@
 ```
 paper_database/
 ├── public/
-│   └── data.json           # 論文データ (静的JSON)
+│   └── data.json              # 論文データ (静的JSON)
 ├── src/
 │   ├── components/
-│   │   ├── PaperCard.tsx   # 論文カード表示
-│   │   ├── SearchBar.tsx   # 検索バー
-│   │   └── Sidebar.tsx     # タグフィルターサイドバー
-│   ├── App.tsx             # メインアプリケーション
-│   ├── types.ts            # 型定義
-│   ├── main.tsx            # エントリポイント
-│   ├── index.css           # グローバルスタイル
-│   └── vite-env.d.ts       # Vite型定義
+│   │   ├── PaperCard.tsx      # 論文カード表示
+│   │   ├── SearchBar.tsx      # 検索バー
+│   │   └── Sidebar.tsx        # タグフィルターサイドバー
+│   ├── utils/
+│   │   ├── parseResearch.ts   # Markdownパーサー
+│   │   └── deduplication.ts   # 重複チェック
+│   ├── App.tsx                # メインアプリケーション
+│   ├── types.ts               # 型定義
+│   ├── main.tsx               # エントリポイント
+│   ├── index.css              # グローバルスタイル
+│   └── vite-env.d.ts          # Vite型定義
+├── scripts/
+│   └── add-papers.ts          # CLIインポートツール
 ├── index.html
 ├── package.json
 ├── tsconfig.json
@@ -174,27 +179,42 @@ npm run preview  # ビルド結果プレビュー
 
 ---
 
-## Phase 3: ディープリサーチインポート機能
+## Phase 3: ディープリサーチインポート機能 ✅ 完了
 **目標**: Markdown/テキストから論文情報を抽出
 
-### Tasks
-1. **scripts/import-papers.ts 作成**
-   - Markdownパーサー
-   - DOI/arXivリンクの正規表現抽出
+### 完了したタスク
+1. ✅ **src/utils/parseResearch.ts 作成**
+   - DOI正規表現抽出 (`extractDOIs()`)
+   - arXiv ID正規表現抽出 (`extractArxivIds()`)
    - タイトル・著者のヒューリスティック抽出
+   - Markdown記法のクリーンアップ
+   - `parseResearchMarkdown()` メイン関数
+   - `toPaper()` 変換関数
 
-2. **重複チェック機能**
+2. ✅ **src/utils/deduplication.ts 作成**
+   - Levenshtein距離による類似度計算
    - DOI完全一致チェック
-   - タイトル類似度 (Levenshtein距離 or Fuse.js)
-   - 重複候補の対話的確認
+   - arXiv ID完全一致チェック
+   - タイトル類似度チェック（閾値: 0.9）
+   - `checkDuplicates()` バッチ重複チェック
+   - `formatDuplicateReport()` レポート生成
 
-3. **バッチインポート**
-   - 複数論文の一括追加
-   - インポート結果レポート
+3. ✅ **scripts/add-papers.ts 作成**
+   - CLIツール実装
+   - `npm run add-papers <filepath>` で実行
+   - `--check` オプション（ドライラン）
+   - `--tags` オプション（タグ付与）
+   - `--status` オプション（ステータス指定）
+
+### 使用方法
+```bash
+npm run add-papers research.md           # マークダウンからインポート
+npm run add-papers --check research.md   # 重複チェックのみ
+npm run add-papers --tags "LLM,NLP" research.md  # タグ付きでインポート
+```
 
 ### Dependencies
-- Phase 1 (データスキーマ)
-- Phase 2 (メタデータ取得でエンリッチ)
+- Phase 1 (データスキーマ) ✅
 
 ---
 

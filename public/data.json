@@ -2,12 +2,21 @@
   {
     "id": "1",
     "title": "Attention Is All You Need",
-    "authors": ["Ashish Vaswani", "Noam Shazeer", "Niki Parmar", "Jakob Uszkoreit"],
+    "authors": [
+      "Ashish Vaswani",
+      "Noam Shazeer",
+      "Niki Parmar",
+      "Jakob Uszkoreit"
+    ],
     "year": 2017,
     "doi": "10.48550/arXiv.1706.03762",
     "url": "https://arxiv.org/abs/1706.03762",
     "abstract": "Transformerアーキテクチャを提案した画期的な論文。自己注意機構のみを用いた新しいシーケンス変換モデルを導入し、RNNやCNNに依存せずに高品質な翻訳を実現。並列化が容易で訓練時間を大幅に短縮できる。BLEUスコアで当時の最高性能を達成し、その後のNLP分野に革命をもたらした。",
-    "tags": ["Transformer", "NLP", "Attention"],
+    "tags": [
+      "Transformer",
+      "NLP",
+      "Attention"
+    ],
     "status": "read",
     "addedDate": "2024-01-01",
     "readDate": "2024-01-15",
@@ -22,12 +31,22 @@
   {
     "id": "2",
     "title": "BERT: Pre-training of Deep Bidirectional Transformers",
-    "authors": ["Jacob Devlin", "Ming-Wei Chang", "Kenton Lee", "Kristina Toutanova"],
+    "authors": [
+      "Jacob Devlin",
+      "Ming-Wei Chang",
+      "Kenton Lee",
+      "Kristina Toutanova"
+    ],
     "year": 2018,
     "doi": "10.48550/arXiv.1810.04805",
     "url": "https://arxiv.org/abs/1810.04805",
     "abstract": "双方向Transformerを用いた事前学習モデルBERTを提案。マスク言語モデリングと次文予測タスクによる事前学習で、11のNLPタスクで最高性能を達成。ファインチューニングによる転移学習の有効性を実証し、NLPの事前学習パラダイムを確立した。",
-    "tags": ["BERT", "NLP", "Pre-training", "Transformer"],
+    "tags": [
+      "BERT",
+      "NLP",
+      "Pre-training",
+      "Transformer"
+    ],
     "status": "read",
     "addedDate": "2024-01-01",
     "readDate": "2024-01-20",
@@ -42,12 +61,19 @@
   {
     "id": "3",
     "title": "GPT-4 Technical Report",
-    "authors": ["OpenAI"],
+    "authors": [
+      "OpenAI"
+    ],
     "year": 2023,
     "doi": "10.48550/arXiv.2303.08774",
     "url": "https://arxiv.org/abs/2303.08774",
     "abstract": "OpenAIが開発した大規模マルチモーダルモデルGPT-4の技術レポート。テキストと画像を入力として受け付け、テキストを出力する。様々な専門的・学術的ベンチマークで人間レベルの性能を達成。安全性と整合性の向上に関する取り組みも詳述。",
-    "tags": ["GPT", "LLM", "Multimodal", "OpenAI"],
+    "tags": [
+      "GPT",
+      "LLM",
+      "Multimodal",
+      "OpenAI"
+    ],
     "status": "read",
     "addedDate": "2024-01-05",
     "readDate": "2024-02-01",
@@ -59,12 +85,19 @@
   {
     "id": "4",
     "title": "Diffusion Models Beat GANs on Image Synthesis",
-    "authors": ["Prafulla Dhariwal", "Alex Nichol"],
+    "authors": [
+      "Prafulla Dhariwal",
+      "Alex Nichol"
+    ],
     "year": 2021,
     "doi": "10.48550/arXiv.2105.05233",
     "url": "https://arxiv.org/abs/2105.05233",
     "abstract": "拡散モデルが画像生成においてGANを上回る性能を達成できることを実証。分類器ガイダンスを導入し、多様性と忠実度のトレードオフを制御可能に。ImageNetでFIDスコア4.59を達成し、BigGAN-deepを上回る。",
-    "tags": ["Diffusion", "Image Generation", "Deep Learning"],
+    "tags": [
+      "Diffusion",
+      "Image Generation",
+      "Deep Learning"
+    ],
     "status": "read",
     "addedDate": "2024-01-10",
     "readDate": "2024-02-15",
@@ -79,12 +112,20 @@
   {
     "id": "5",
     "title": "LLaMA: Open and Efficient Foundation Language Models",
-    "authors": ["Hugo Touvron", "Thibaut Lavril", "Gautier Izacard"],
+    "authors": [
+      "Hugo Touvron",
+      "Thibaut Lavril",
+      "Gautier Izacard"
+    ],
     "year": 2023,
     "doi": "10.48550/arXiv.2302.13971",
     "url": "https://arxiv.org/abs/2302.13971",
     "abstract": "Meta AIが公開したオープンな大規模言語モデルLLaMA。7Bから65Bパラメータまでの複数サイズを提供。公開データのみで訓練され、多くのベンチマークでGPT-3に匹敵する性能を達成。研究コミュニティへの貢献を目的として公開。",
-    "tags": ["LLM", "Open Source", "Meta"],
+    "tags": [
+      "LLM",
+      "Open Source",
+      "Meta"
+    ],
     "status": "reading",
     "addedDate": "2024-01-15",
     "citationCount": 6800,
@@ -95,12 +136,21 @@
   {
     "id": "6",
     "title": "Constitutional AI: Harmlessness from AI Feedback",
-    "authors": ["Yuntao Bai", "Saurav Kadavath", "Sandipan Kundu"],
+    "authors": [
+      "Yuntao Bai",
+      "Saurav Kadavath",
+      "Sandipan Kundu"
+    ],
     "year": 2022,
     "doi": "10.48550/arXiv.2212.08073",
     "url": "https://arxiv.org/abs/2212.08073",
     "abstract": "AnthropicによるConstitutional AIの提案。人間のフィードバックではなく、AIからのフィードバックを用いてモデルを安全に訓練する手法。憲法的な原則に基づいてAIが自己批判・修正を行うことで、有害性を低減しつつ有用性を維持。",
-    "tags": ["AI Safety", "RLHF", "Anthropic", "LLM"],
+    "tags": [
+      "AI Safety",
+      "RLHF",
+      "Anthropic",
+      "LLM"
+    ],
     "status": "posted",
     "addedDate": "2024-01-20",
     "readDate": "2024-02-10",
@@ -113,12 +163,27 @@
   {
     "id": "7",
     "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
-    "authors": ["Jason Wei", "Xuezhi Wang", "Dale Schuurmans", "Maarten Bosma", "Brian Ichter", "Fei Xia", "Ed Chi", "Quoc Le", "Denny Zhou"],
+    "authors": [
+      "Jason Wei",
+      "Xuezhi Wang",
+      "Dale Schuurmans",
+      "Maarten Bosma",
+      "Brian Ichter",
+      "Fei Xia",
+      "Ed Chi",
+      "Quoc Le",
+      "Denny Zhou"
+    ],
     "year": 2022,
     "doi": "10.48550/arXiv.2201.11903",
     "url": "https://arxiv.org/abs/2201.11903",
     "abstract": "Chain-of-Thought (CoT) プロンプティングの提案。中間的な推論ステップを含む例示を与えることで、大規模言語モデルの複雑な推論能力を大幅に向上させる手法。算術、常識推論、記号推論の各タスクで劇的な性能向上を実証。特にGSM8Kベンチマークでは標準プロンプティングの17.9%から57.1%へ精度が向上。モデルスケールが十分に大きい場合にのみ有効という重要な発見も報告。",
-    "tags": ["LLM", "Prompting", "Reasoning", "Google"],
+    "tags": [
+      "LLM",
+      "Prompting",
+      "Reasoning",
+      "Google"
+    ],
     "status": "to-read",
     "addedDate": "2026-01-16",
     "citationCount": 7500,
@@ -126,5 +191,82 @@
     "journal": {
       "name": "NeurIPS 2022"
     }
+  },
+  {
+    "id": "2112.11446",
+    "title": "Scaling Language Models: Methods, Analysis & Insights from Training Gopher",
+    "authors": [
+      "DeepMind"
+    ],
+    "year": 2022,
+    "url": "https://arxiv.org/abs/2112.11446",
+    "tags": [
+      "LLM",
+      "Scaling"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
+  },
+  {
+    "id": "10.48550/arXiv.2203.15556",
+    "title": "Training Compute-Optimal Large Language Models",
+    "authors": [
+      "Unknown"
+    ],
+    "year": 2022,
+    "doi": "10.48550/arXiv.2203.15556",
+    "url": "https://arxiv.org/abs/2203.15556",
+    "tags": [
+      "LLM",
+      "Scaling"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
+  },
+  {
+    "id": "2303.12712",
+    "title": "Sparks of Artificial General Intelligence: Early experiments with GPT-4",
+    "authors": [
+      "Unknown"
+    ],
+    "year": 2023,
+    "url": "https://arxiv.org/abs/2303.12712",
+    "tags": [
+      "LLM",
+      "Scaling"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
+  },
+  {
+    "id": "10.48550/arXiv.2005.11401",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "authors": [
+      "Unknown"
+    ],
+    "year": 2020,
+    "doi": "10.48550/arXiv.2005.11401",
+    "url": "https://doi.org/10.48550/arXiv.2005.11401",
+    "tags": [
+      "LLM",
+      "Scaling"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
+  },
+  {
+    "id": "2203.02155",
+    "title": "Paper arXiv:2203.02155",
+    "authors": [
+      "Unknown"
+    ],
+    "year": 2022,
+    "url": "https://arxiv.org/abs/2203.02155",
+    "tags": [
+      "LLM",
+      "Scaling"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
   }
 ]
