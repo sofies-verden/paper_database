@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "title": "Attention Is All You Need",
+    "summary": "Transformerアーキテクチャを提案した画期的な論文。自己注意機構のみを用いた新しいシーケンス変換モデルを導入し、RNNやCNNに依存せずに高品質な翻訳を実現。並列化が容易で訓練時間を大幅に短縮できる。BLEUスコアで当時の最高性能を達成し、その後のNLP分野に革命をもたらした。",
+    "tags": ["Transformer", "NLP", "Attention"],
+    "publishedDate": "2017-06-12",
+    "url": "https://arxiv.org/abs/1706.03762",
+    "authors": ["Ashish Vaswani", "Noam Shazeer", "Niki Parmar", "Jakob Uszkoreit"]
+  },
+  {
+    "id": "2",
+    "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+    "summary": "双方向Transformerを用いた事前学習モデルBERTを提案。マスク言語モデリングと次文予測タスクによる事前学習で、11のNLPタスクで最高性能を達成。ファインチューニングによる転移学習の有効性を実証し、NLPの事前学習パラダイムを確立した。",
+    "tags": ["BERT", "NLP", "Pre-training", "Transformer"],
+    "publishedDate": "2018-10-11",
+    "url": "https://arxiv.org/abs/1810.04805",
+    "authors": ["Jacob Devlin", "Ming-Wei Chang", "Kenton Lee", "Kristina Toutanova"]
+  },
+  {
+    "id": "3",
+    "title": "GPT-4 Technical Report",
+    "summary": "OpenAIが開発した大規模マルチモーダルモデルGPT-4の技術レポート。テキストと画像を入力として受け付け、テキストを出力する。様々な専門的・学術的ベンチマークで人間レベルの性能を達成。安全性と整合性の向上に関する取り組みも詳述。",
+    "tags": ["GPT", "LLM", "Multimodal", "OpenAI"],
+    "publishedDate": "2023-03-15",
+    "url": "https://arxiv.org/abs/2303.08774",
+    "authors": ["OpenAI"]
+  },
+  {
+    "id": "4",
+    "title": "Diffusion Models Beat GANs on Image Synthesis",
+    "summary": "拡散モデルが画像生成においてGANを上回る性能を達成できることを実証。分類器ガイダンスを導入し、多様性と忠実度のトレードオフを制御可能に。ImageNetでFIDスコア4.59を達成し、BigGAN-deepを上回る。",
+    "tags": ["Diffusion", "Image Generation", "Deep Learning"],
+    "publishedDate": "2021-05-11",
+    "url": "https://arxiv.org/abs/2105.05233",
+    "authors": ["Prafulla Dhariwal", "Alex Nichol"]
+  },
+  {
+    "id": "5",
+    "title": "LLaMA: Open and Efficient Foundation Language Models",
+    "summary": "Meta AIが公開したオープンな大規模言語モデルLLaMA。7Bから65Bパラメータまでの複数サイズを提供。公開データのみで訓練され、多くのベンチマークでGPT-3に匹敵する性能を達成。研究コミュニティへの貢献を目的として公開。",
+    "tags": ["LLM", "Open Source", "Meta"],
+    "publishedDate": "2023-02-27",
+    "url": "https://arxiv.org/abs/2302.13971",
+    "authors": ["Hugo Touvron", "Thibaut Lavril", "Gautier Izacard"]
+  },
+  {
+    "id": "6",
+    "title": "Constitutional AI: Harmlessness from AI Feedback",
+    "summary": "AnthropicによるConstitutional AIの提案。人間のフィードバックではなく、AIからのフィードバックを用いてモデルを安全に訓練する手法。憲法的な原則に基づいてAIが自己批判・修正を行うことで、有害性を低減しつつ有用性を維持。",
+    "tags": ["AI Safety", "RLHF", "Anthropic", "LLM"],
+    "publishedDate": "2022-12-15",
+    "url": "https://arxiv.org/abs/2212.08073",
+    "authors": ["Yuntao Bai", "Saurav Kadavath", "Sandipan Kundu"]
+  }
+]
