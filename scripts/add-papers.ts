@@ -9,11 +9,37 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { parseResearchMarkdown, toPaper } from '../src/utils/parseResearch.js';
 import { checkDuplicates, formatDuplicateReport } from '../src/utils/deduplication.js';
+import {
+  enrichPapers,
+  applyEnrichment,
+  getEnrichmentSummary,
+  type EnrichmentResult,
+} from '../src/services/paperApi.js';
 import type { Paper } from '../src/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATA_FILE = path.join(__dirname, '../public/data.json');
+const ENV_FILE = path.join(__dirname, '../.env');
+
+// Load environment variables
+function loadEnv(): Record<string, string> {
+  const env: Record<string, string> = {};
+  try {
+    if (fs.existsSync(ENV_FILE)) {
+      const content = fs.readFileSync(ENV_FILE, 'utf-8');
+      for (const line of content.split('\n')) {
+        const match = line.match(/^([^#=]+)=(.*)$/);
+        if (match) {
+          env[match[1].trim()] = match[2].trim().replace(/^["']|["']$/g, '');
+        }
+      }
+    }
+  } catch {
+    // Ignore errors
+  }
+  return env;
+}
 
 function loadExistingPapers(): Paper[] {
   try {
@@ -43,6 +69,24 @@ function generateId(papers: Paper[]): string {
   return String(maxNumericId + 1);
 }
 
+/**
+ * Render a progress bar
+ */
+function renderProgressBar(current: number, total: number, width: number = 30): string {
+  const percent = Math.round((current / total) * 100);
+  const filled = Math.round((current / total) * width);
+  const empty = width - filled;
+  const bar = '█'.repeat(filled) + '░'.repeat(empty);
+  return `[${bar}] ${percent}% (${current}/${total})`;
+}
+
+/**
+ * Clear current line and move cursor to start
+ */
+function clearLine(): void {
+  process.stdout.write('\r\x1b[K');
+}
+
 async function main() {
   const args = process.argv.slice(2);
 
@@ -56,20 +100,26 @@ Usage:
   npm run add-papers --help         このヘルプを表示
 
 Options:
-  --check      重複チェックのみ実行
+  --check         重複チェックのみ実行
+  --enrich        メタデータを外部APIから取得（Semantic Scholar, OpenAlex）
   --tags <t1,t2>  追加する論文にタグを付与
   --status <s>    ステータスを指定 (to-read, reading, read, posted)
 
 Examples:
   npm run add-papers research.md
+  npm run add-papers --enrich research.md
   npm run add-papers --check research.md
-  npm run add-papers --tags "LLM,Transformer" research.md
+  npm run add-papers --tags "LLM,Transformer" --enrich research.md
+
+Environment:
+  OPENALEX_EMAIL  OpenAlex APIの連絡先メール（.envファイルに設定）
 `);
     process.exit(0);
   }
 
   // Parse arguments
   let checkOnly = false;
+  let enrich = false;
   let tags: string[] = [];
   let status: 'to-read' | 'reading' | 'read' | 'posted' = 'to-read';
   let filepath = '';
@@ -78,6 +128,8 @@ Examples:
     const arg = args[i];
     if (arg === '--check') {
       checkOnly = true;
+    } else if (arg === '--enrich') {
+      enrich = true;
     } else if (arg === '--help') {
       // Re-run with no args to show help
       process.argv = process.argv.slice(0, 2);
@@ -143,8 +195,8 @@ Examples:
     process.exit(0);
   }
 
-  // Convert to Paper type and add
-  const newPapers: Paper[] = report.newPapers.map((extracted, index) => {
+  // Convert to Paper type
+  let newPapers: Paper[] = report.newPapers.map((extracted, index) => {
     const paper = toPaper(extracted, { status, tags });
     // Generate sequential ID if DOI/arXiv not available
     if (!extracted.doi && !extracted.arxivId) {
@@ -154,11 +206,60 @@ Examples:
     return paper;
   });
 
+  // Enrich with metadata if requested
+  let enrichmentResults: Map<string, EnrichmentResult> | undefined;
+
+  if (enrich) {
+    const env = loadEnv();
+    const email = env.OPENALEX_EMAIL || process.env.OPENALEX_EMAIL;
+
+    console.log('\n🔍 メタデータ取得中...');
+
+    if (email) {
+      console.log(`   OpenAlex連絡先: ${email}`);
+    } else {
+      console.log('   ⚠️  OPENALEX_EMAILが設定されていません（.envファイルで設定推奨）');
+    }
+
+    enrichmentResults = await enrichPapers(newPapers, {
+      email,
+      onProgress: (current, total) => {
+        clearLine();
+        process.stdout.write(`   ${renderProgressBar(current, total)}`);
+      },
+    });
+
+    // Clear progress line and show results
+    clearLine();
+
+    // Apply enrichment
+    newPapers = applyEnrichment(newPapers, enrichmentResults);
+
+    // Show summary
+    const summary = getEnrichmentSummary(enrichmentResults, newPapers);
+    console.log(`\n📈 メタデータ取得結果:`);
+    console.log(`   成功: ${summary.enriched}件 / 失敗: ${summary.failed}件`);
+    console.log(`   ソース: Semantic Scholar ${summary.sources.semantic_scholar}件, OpenAlex ${summary.sources.openalex}件`);
+
+    if (summary.averageCitations > 0) {
+      console.log(`   平均被引用数: ${summary.averageCitations}件`);
+    }
+  }
+
   // Merge and save
   const allPapers = [...existingPapers, ...newPapers];
   savePapers(allPapers);
 
+  // Final summary
   console.log(`\n✅ ${newPapers.length}件の新規論文を追加しました`);
+
+  if (enrich && enrichmentResults) {
+    const summary = getEnrichmentSummary(enrichmentResults, newPapers);
+    if (summary.averageCitations > 0) {
+      console.log(`   （被引用数平均: ${summary.averageCitations}件）`);
+    }
+  }
+
   console.log(`📊 合計: ${allPapers.length}件`);
 }
 

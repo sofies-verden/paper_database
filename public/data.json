@@ -268,5 +268,30 @@
     ],
     "status": "to-read",
     "addedDate": "2026-01-16"
+  },
+  {
+    "id": "2106.09685",
+    "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+    "authors": [
+      "Unknown"
+    ],
+    "year": 2022,
+    "url": "https://arxiv.org/abs/2106.09685",
+    "tags": [],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
+  },
+  {
+    "id": "10.48550/arXiv.2307.09288",
+    "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+    "authors": [
+      "Unknown"
+    ],
+    "year": 2023,
+    "doi": "10.48550/arXiv.2307.09288",
+    "url": "https://doi.org/10.48550/arXiv.2307.09288",
+    "tags": [],
+    "status": "to-read",
+    "addedDate": "2026-01-16"
   }
 ]

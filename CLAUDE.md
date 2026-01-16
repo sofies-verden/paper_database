@@ -26,6 +26,8 @@ paper_database/
 │   │   ├── PaperCard.tsx      # 論文カード表示
 │   │   ├── SearchBar.tsx      # 検索バー
 │   │   └── Sidebar.tsx        # タグフィルターサイドバー
+│   ├── services/
+│   │   └── paperApi.ts        # 外部API統合 (Semantic Scholar, OpenAlex)
 │   ├── utils/
 │   │   ├── parseResearch.ts   # Markdownパーサー
 │   │   └── deduplication.ts   # 重複チェック
@@ -35,7 +37,8 @@ paper_database/
 │   ├── index.css              # グローバルスタイル
 │   └── vite-env.d.ts          # Vite型定義
 ├── scripts/
-│   └── add-papers.ts          # CLIインポートツール
+│   └── add-papers.ts          # CLIインポートツール (--enrich対応)
+├── .env.example               # 環境変数テンプレート
 ├── index.html
 ├── package.json
 ├── tsconfig.json
@@ -156,26 +159,40 @@ npm run preview  # ビルド結果プレビュー
 
 ---
 
-## Phase 2: メタデータ自動取得ツール (CLI)
+## Phase 2: メタデータ自動取得ツール (CLI) ✅ 完了
 **目標**: 外部APIから論文メタデータを取得するCLIツール
 
-### Tasks
-1. **scripts/fetch-metadata.ts 作成**
-   - Semantic Scholar API連携
-   - OpenAlex API連携
-   - Crossref API連携 (フォールバック)
+### 完了したタスク
+1. ✅ **src/services/paperApi.ts 作成**
+   - Semantic Scholar API連携 (`getSemanticScholarData()`)
+   - OpenAlex API連携 (`getOpenAlexData()`)
+   - DOI/arXiv ID/タイトルからの検索
+   - エラーハンドリング・リトライ（3回まで）
+   - レートリミット対応（バッチ処理、遅延）
 
-2. **API統合ロジック**
-   - DOI/arXiv IDからの検索
-   - タイトルからのファジー検索
-   - レートリミット対応
+2. ✅ **API統合ロジック**
+   - `enrichPaper()` - 単一論文のメタデータ取得
+   - `enrichPapers()` - バッチ処理（並列10件、バッチ間遅延）
+   - `applyEnrichment()` - 取得データの適用
+   - `getEnrichmentSummary()` - 統計サマリー生成
 
-3. **data.json 更新機能**
-   - 既存エントリへのメタデータ追記
-   - 差分更新 (上書き防止)
+3. ✅ **CLIツール統合**
+   - `--enrich` フラグで add-papers.ts に統合
+   - プログレスバー表示
+   - 取得結果サマリー表示
+
+### 使用方法
+```bash
+npm run add-papers --enrich research.md    # メタデータ取得付きインポート
+```
+
+### 環境設定 (.env)
+```
+OPENALEX_EMAIL=your-email@example.com
+```
 
 ### Dependencies
-- Phase 1 (ExtendedPaper型が必要)
+- Phase 1 (ExtendedPaper型が必要) ✅
 
 ---
 
