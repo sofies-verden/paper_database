@@ -293,5 +293,262 @@
     "tags": [],
     "status": "to-read",
     "addedDate": "2026-01-16"
+  },
+  {
+    "id": "10.1257/aer.97.2.31",
+    "title": "The Technology of Skill Formation",
+    "authors": [
+      "Flavio Cunha",
+      "James J. Heckman"
+    ],
+    "year": 2007,
+    "doi": "10.1257/aer.97.2.31",
+    "url": "https://www.aeaweb.org/articles?id=10.1257%2Faer.97.2.31",
+    "abstract": "スキル形成の多段階生産関数モデルを提案。自己生産性（Self-productivity）と動学的補完性（Dynamic Complementarity）という二つの特性を理論化し、早期教育投資の優位性を数理的に説明。認知能力と非認知能力が相互に影響し合いながら発達することを示し、教育政策への重要な示唆を提供した。",
+    "tags": [
+      "Skill Formation",
+      "Education Economics",
+      "Human Capital",
+      "Dynamic Complementarity"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 4200,
+    "influentialCitations": 850,
+    "journal": {
+      "name": "American Economic Review",
+      "hIndex": 350
+    }
+  },
+  {
+    "id": "10.3982/ECTA6551",
+    "title": "Estimating the Technology of Cognitive and Noncognitive Skill Formation",
+    "authors": [
+      "Flavio Cunha",
+      "James J. Heckman",
+      "Susanne M. Schennach"
+    ],
+    "year": 2010,
+    "doi": "10.3982/ECTA6551",
+    "url": "https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA6551",
+    "abstract": "認知・非認知スキル形成の多段階生産関数を定式化し推定。親の投資と環境が各発達段階で子供のスキルに与える影響を分析。異時点間の投資代替弾力性を推定し、早期投資と後期補償の効果を比較。非線形因子モデルに基づく非パラメトリック識別法を確立した画期的研究。",
+    "tags": [
+      "Skill Formation",
+      "Econometrics",
+      "Cognitive Development",
+      "Noncognitive Skills"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 2800,
+    "influentialCitations": 620,
+    "journal": {
+      "name": "Econometrica",
+      "hIndex": 280
+    }
+  },
+  {
+    "id": "10.1111/j.1465-7295.2008.00163.x",
+    "title": "Schools, Skills, and Synapses",
+    "authors": [
+      "James J. Heckman"
+    ],
+    "year": 2008,
+    "doi": "10.1111/j.1465-7295.2008.00163.x",
+    "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1465-7295.2008.00163.x",
+    "abstract": "認知・非認知能力が成人期の成果に与える役割、幼少期における能力格差の早期出現、家庭環境の役割、アメリカの家庭の問題傾向、早期介入の効果について包括的に論じる。神経科学の知見を経済学に統合し、早期教育投資の重要性を脳発達の観点から説明した影響力のある論文。",
+    "tags": [
+      "Early Childhood Education",
+      "Neuroscience",
+      "Skill Formation",
+      "Human Capital"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 3500,
+    "influentialCitations": 750,
+    "journal": {
+      "name": "Economic Inquiry",
+      "hIndex": 85
+    }
+  },
+  {
+    "id": "10.1037/0012-1649.44.2.457",
+    "title": "An Overview of Markov Chain Methods for the Study of Stage-Sequential Developmental Processes",
+    "authors": [
+      "David Kaplan"
+    ],
+    "year": 2008,
+    "doi": "10.1037/0012-1649.44.2.457",
+    "url": "https://psycnet.apa.org/record/2008-02379-014",
+    "abstract": "段階的発達過程の研究のためのマルコフ連鎖モデリングの拡張に基づく定量的方法論の概観。顕在マルコフモデル、潜在マルコフモデル、潜在遷移分析（LTA）、混合潜在マルコフモデルの4手法を提示。Early Childhood Longitudinal Studyのデータを用いて早期読解力発達の段階的遷移を分析。",
+    "tags": [
+      "Markov Models",
+      "Latent Transition Analysis",
+      "Developmental Psychology",
+      "Educational Assessment"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 480,
+    "influentialCitations": 95,
+    "journal": {
+      "name": "Developmental Psychology",
+      "hIndex": 220
+    }
+  },
+  {
+    "id": "10.3102/0013189X20912798",
+    "title": "Interpreting Effect Sizes of Education Interventions",
+    "authors": [
+      "Matthew A. Kraft"
+    ],
+    "year": 2020,
+    "doi": "10.3102/0013189X20912798",
+    "url": "https://journals.sagepub.com/doi/10.3102/0013189X20912798",
+    "abstract": "教育介入の効果量解釈に関する5つのガイドラインを提示。Cohen基準では小さい効果もフィールド介入としては大きいことを指摘。研究デザイン、コスト、スケーラビリティを考慮した効果量解釈の構造化スキーマと実証的ベンチマークを提案。標準化テスト成果を持つ因果研究に適用可能。",
+    "tags": [
+      "Effect Size",
+      "Educational Research",
+      "Meta-analysis",
+      "Causal Inference"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 1800,
+    "influentialCitations": 380,
+    "journal": {
+      "name": "Educational Researcher",
+      "hIndex": 180
+    }
+  },
+  {
+    "id": "10.3982/QE890",
+    "title": "A Dynamic Model of Personality, Schooling, and Occupational Choice",
+    "authors": [
+      "Petra Todd",
+      "Weilong Zhang"
+    ],
+    "year": 2020,
+    "doi": "10.3982/QE890",
+    "url": "https://onlinelibrary.wiley.com/doi/abs/10.3982/QE890",
+    "abstract": "ビッグファイブ性格特性を組み込んだ教育・職業選択の動学的構造モデル。オーストラリアHILDAデータセットを用いて推定。性格特性が15歳から30代半ばにかけて進化し、その後安定することを発見。人格特性がライフサイクルを通じた教育・職業選択に重要な役割を果たすことを実証。",
+    "tags": [
+      "Dynamic Structural Model",
+      "Personality Traits",
+      "Occupational Choice",
+      "Labor Economics"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 180,
+    "influentialCitations": 35,
+    "journal": {
+      "name": "Quantitative Economics",
+      "hIndex": 65
+    }
+  },
+  {
+    "id": "10.1086/262080",
+    "title": "The Career Decisions of Young Men",
+    "authors": [
+      "Michael P. Keane",
+      "Kenneth I. Wolpin"
+    ],
+    "year": 1997,
+    "doi": "10.1086/262080",
+    "url": "https://www.journals.uchicago.edu/doi/10.1086/262080",
+    "abstract": "教育、就業、職業選択の動学的離散選択モデルの構造推定。NLSY79の11年間追跡データを使用。個人が将来の期待効用を最大化するよう行動を選択するベルマン方程式に基づくモデルを構築。動学的構造モデルによる政策シミュレーションの先駆的研究として多大な影響を与えた。",
+    "tags": [
+      "Dynamic Discrete Choice",
+      "Labor Economics",
+      "Structural Estimation",
+      "NLSY"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 2200,
+    "influentialCitations": 520,
+    "journal": {
+      "name": "Journal of Political Economy",
+      "hIndex": 280
+    }
+  },
+  {
+    "id": "10.1007/BF01099821",
+    "title": "Knowledge Tracing: Modeling the Acquisition of Procedural Knowledge",
+    "authors": [
+      "Albert T. Corbett",
+      "John R. Anderson"
+    ],
+    "year": 1995,
+    "doi": "10.1007/BF01099821",
+    "url": "https://link.springer.com/article/10.1007/BF01099821",
+    "abstract": "ベイズ知識追跡（BKT）モデルの提案。学生の知識状態を「未習得」と「習得」の二値隠れ状態としてモデル化。ACTプログラミングチューターでの実装を通じ、学習確率P(T)、初期知識確率P(L0)、推測確率P(G)、失策確率P(S)のパラメータ推定法を確立。適応学習システムの基盤技術となった。",
+    "tags": [
+      "Bayesian Knowledge Tracing",
+      "Intelligent Tutoring Systems",
+      "Educational Data Mining",
+      "Cognitive Modeling"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 3200,
+    "influentialCitations": 680,
+    "journal": {
+      "name": "User Modeling and User-Adapted Interaction",
+      "hIndex": 75
+    }
+  },
+  {
+    "id": "10.4324/9780203887332",
+    "title": "Visible Learning: A Synthesis of Over 800 Meta-Analyses Relating to Achievement",
+    "authors": [
+      "John Hattie"
+    ],
+    "year": 2009,
+    "doi": "10.4324/9780203887332",
+    "url": "https://www.taylorfrancis.com/books/mono/10.4324/9780203887332/visible-learning-john-hattie",
+    "abstract": "800以上のメタ分析、50,000以上の研究、8,000万人以上の生徒データを統合した教育研究史上最大規模のメタ研究。138の教育的影響要因を効果量（Cohen's d）でランク付け。平均効果量d=0.40を「ヒンジポイント」として提案。「教えることの聖杯」と呼ばれる教育研究のマイルストーン。",
+    "tags": [
+      "Meta-analysis",
+      "Effect Size",
+      "Educational Research",
+      "Teaching Effectiveness"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 45000,
+    "influentialCitations": 8500,
+    "journal": {
+      "name": "Routledge"
+    }
+  },
+  {
+    "id": "10.3386/w22325",
+    "title": "College Attrition and the Dynamics of Information Revelation",
+    "authors": [
+      "Peter Arcidiacono",
+      "Esteban Aucejo",
+      "Arnaud Maurel",
+      "Tyler Ransom"
+    ],
+    "year": 2016,
+    "doi": "10.3386/w22325",
+    "url": "https://www.nber.org/papers/w22325",
+    "abstract": "大学と労働市場における情報摩擦の役割を調査する動学的構造モデル。2年制・4年制大学、大学院、理系・非理系専攻の異質性を考慮。成績と賃金を通じた相関学習により、能力と生産性に関する情報が徐々に明らかになるプロセスをモデル化。情報摩擦の除去で卒業率が4.4ポイント上昇することを示す。",
+    "tags": [
+      "Dynamic Structural Model",
+      "Higher Education",
+      "Information Economics",
+      "College Dropout"
+    ],
+    "status": "to-read",
+    "addedDate": "2026-01-17",
+    "citationCount": 320,
+    "influentialCitations": 65,
+    "journal": {
+      "name": "NBER Working Paper"
+    }
   }
 ]
