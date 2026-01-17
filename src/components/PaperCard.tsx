@@ -71,7 +71,7 @@ export function PaperCard({ paper, onTagClick }: PaperCardProps) {
         hasMoreContent ? 'cursor-pointer' : ''
       }`}
     >
-      {/* Header: Status badge and Citation count */}
+      {/* Header: Status badge */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
           {/* Status Badge */}
@@ -80,19 +80,6 @@ export function PaperCard({ paper, onTagClick }: PaperCardProps) {
             {status.label}
           </span>
         </div>
-
-        {/* Citation Count Badge */}
-        {paper.citationCount !== undefined && paper.citationCount > 0 && (
-          <div className="flex items-center gap-1 text-sm text-gray-500" title={`${paper.citationCount} citations`}>
-            <Quote className="w-4 h-4" />
-            <span className="font-medium">{formatNumber(paper.citationCount)}</span>
-            {paper.influentialCitations !== undefined && paper.influentialCitations > 0 && (
-              <span className="text-xs text-gray-400" title={`${paper.influentialCitations} influential citations`}>
-                ({formatNumber(paper.influentialCitations)})
-              </span>
-            )}
-          </div>
-        )}
       </div>
 
       {/* Title */}
@@ -100,16 +87,40 @@ export function PaperCard({ paper, onTagClick }: PaperCardProps) {
         {paper.title}
       </h3>
 
-      {/* Meta info: Year, Authors */}
-      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-3">
+      {/* Meta info: Year, Authors, Journal, Citations */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500 mb-3">
+        {/* Publication Year */}
         <div className="flex items-center gap-1">
           <Calendar className="w-4 h-4" />
           <span>{paper.year}</span>
         </div>
+        {/* Authors */}
         <div className="flex items-center gap-1">
           <Users className="w-4 h-4" />
           <span>{paper.authors.slice(0, 2).join(', ')}{paper.authors.length > 2 ? ' et al.' : ''}</span>
         </div>
+        {/* Journal/Venue */}
+        {paper.journal?.name && (
+          <div className="flex items-center gap-1">
+            <BookOpen className="w-4 h-4" />
+            <span>{paper.journal.name}</span>
+          </div>
+        )}
+        {/* Citation Count */}
+        {paper.citationCount !== undefined && paper.citationCount > 0 && (
+          <div
+            className="flex items-center gap-1 px-2 py-0.5 bg-amber-50 text-amber-700 rounded-full text-xs font-medium"
+            title={`${paper.citationCount} citations${paper.influentialCitations ? ` (${paper.influentialCitations} influential)` : ''}`}
+          >
+            <Quote className="w-3.5 h-3.5" />
+            <span>{formatNumber(paper.citationCount)} Citations</span>
+            {paper.influentialCitations !== undefined && paper.influentialCitations > 0 && (
+              <span className="text-amber-500">
+                ({formatNumber(paper.influentialCitations)} influential)
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Tags */}
@@ -133,24 +144,6 @@ export function PaperCard({ paper, onTagClick }: PaperCardProps) {
           {isExpanded ? content : summaryPreview}
           {!isExpanded && hasMoreContent && '...'}
         </p>
-      )}
-
-      {/* Journal/Conference Info */}
-      {paper.journal && (
-        <div className="flex flex-wrap items-center gap-3 text-xs text-gray-400 mb-3 border-t border-gray-100 pt-3">
-          <div className="flex items-center gap-1">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>{paper.journal.name}</span>
-          </div>
-          {paper.journal.hIndex !== undefined && (
-            <span title="h-index">h: {paper.journal.hIndex}</span>
-          )}
-          {paper.journal.twoYearCitedness !== undefined && (
-            <span title="2-year mean citedness (Impact Factor alternative)">
-              2yr: {paper.journal.twoYearCitedness.toFixed(1)}
-            </span>
-          )}
-        </div>
       )}
 
       {/* Footer: Expand button and Link */}
