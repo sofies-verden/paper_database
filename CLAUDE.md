@@ -297,26 +297,67 @@ src/components/
 
 ---
 
-## Phase 5: Claude API推薦機能
+## Phase 5: Claude API推薦機能 ✅ 完了
 **目標**: AIによる今日読むべき論文の提案
 
-### Tasks
-1. **scripts/recommend.ts 作成**
-   - Claude API連携
-   - 未読論文リストの送信
-   - 推薦理由の生成
+### 完了したタスク
+1. ✅ **src/services/recommendation.ts 作成**
+   - Claude API連携 (claude-sonnet-4-20250514)
+   - 未読論文リストをプロンプトに含める
+   - 推薦理由・関連度スコア・読む順序を返す
+   - クイック推薦モード（API不要のフォールバック）
 
-2. **推薦ロジック**
-   - 被引用数・影響力を考慮
-   - 最近の興味タグを分析
-   - 読書履歴からの傾向分析
+2. ✅ **推薦ロジック**
+   - ユーザープロファイル定義（研究分野: 教育工学、計量経済学）
+   - 被引用数・影響力のある引用を考慮
+   - ジャーナルh-index・2年間被引用率を考慮
+   - 研究分野との関連性を分析
 
-3. **出力フォーマット**
-   - ターミナル表示
-   - Markdown出力 (オプション)
+3. ✅ **推薦UIコンポーネント**
+   - ヘッダーに「推薦」ボタン追加（未読数バッジ付き）
+   - モーダルダイアログで推薦結果を表示
+   - Claude AI推薦 / クイック推薦の切り替え
+   - 推薦論文へのスクロール＆ハイライト機能
+
+### 使用方法
+1. `.env.example` を `.env` にコピー
+2. `VITE_ANTHROPIC_API_KEY` にClaude APIキーを設定
+3. ヘッダーの「推薦」ボタンをクリック
+4. 「Claude AI推薦」または「クイック推薦」を選択
+5. 「推薦を取得」をクリック
+
+### 環境設定 (.env)
+```bash
+# Claude API推薦機能用（必須）
+VITE_ANTHROPIC_API_KEY=your-anthropic-api-key
+
+# OpenAlex polite pool用（推奨）
+VITE_OPENALEX_EMAIL=your-email@example.com
+```
+
+### 推薦モード
+| モード | 説明 | APIキー |
+|--------|------|---------|
+| Claude AI推薦 | Claude APIで高度な推薦理由を生成 | 必要 |
+| クイック推薦 | 被引用数・タグ関連性でヒューリスティック推薦 | 不要 |
+
+### 実装したコンポーネント
+```
+src/
+├── services/
+│   └── recommendation.ts    # 推薦ロジック
+└── components/
+    └── RecommendationModal.tsx  # 推薦UIモーダル
+```
+
+### セキュリティに関する注意
+⚠️ `VITE_ANTHROPIC_API_KEY` はクライアントサイドで使用されます。
+- 開発/個人利用では問題ありませんが、公開サイトでは注意が必要です
+- プロダクション環境ではバックエンドプロキシの使用を推奨
+- APIキーは `.gitignore` に含まれる `.env` ファイルで管理
 
 ### Dependencies
-- Phase 1-4 (全データが揃った状態)
+- Phase 1-4 (全データが揃った状態) ✅
 - Claude API キー設定
 
 ---
@@ -381,13 +422,11 @@ npm run add-papers -- --status reading research.md  # ステータス指定
 npm run add-papers -- --enrich --tags "LLM" --status to-read research.md  # 組み合わせ
 ```
 
-## 未実装 (Phase 5)
+## UI機能 (Phase 5)
 
-```bash
-# Claude API推薦
-npm run recommend                   # 今日の推薦論文を表示
-npm run recommend -- --count=3      # 3件推薦
-```
+推薦機能はCLIではなくUI内で実装されました:
+- ヘッダーの「推薦」ボタンからアクセス
+- Claude AI推薦（APIキー必要）またはクイック推薦（APIキー不要）を選択可能
 
 ---
 
@@ -399,9 +438,10 @@ npm run recommend -- --count=3      # 3件推薦
 - UIは未設定フィールドを適切に非表示
 
 ## セキュリティ
-- APIキーは `.env` ファイルで管理 (gitignore済み)
-- クライアントサイドにAPIキーを埋め込まない
-- CLIツールはローカル実行のみ
+- CLIツール用APIキーは `.env` ファイルで管理 (gitignore済み)
+- フロントエンド用変数は `VITE_` プレフィックス付きで `.env` に設定
+- ⚠️ `VITE_ANTHROPIC_API_KEY` はクライアントに露出するため、公開サイトでは注意
+- 本番環境ではバックエンドプロキシの使用を推奨
 
 ## パフォーマンス
 - data.jsonは1000件程度まで許容

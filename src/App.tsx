@@ -1,9 +1,10 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import Fuse from 'fuse.js';
-import { Menu, FileText, ArrowUpDown, ChevronDown } from 'lucide-react';
+import { Menu, FileText, ArrowUpDown, ChevronDown, Sparkles } from 'lucide-react';
 import { SearchBar } from './components/SearchBar';
 import { Sidebar } from './components/Sidebar';
 import { PaperCard } from './components/PaperCard';
+import { RecommendationModal } from './components/RecommendationModal';
 import type { Paper, ReadingStatus } from './types';
 
 // Sort options configuration
@@ -26,7 +27,11 @@ function App() {
   const [sortBy, setSortBy] = useState<SortOption>('year-desc');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const [recommendModalOpen, setRecommendModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Refs for scrolling to papers
+  const paperRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + 'data.json')
@@ -145,6 +150,26 @@ function App() {
     setSortDropdownOpen(false);
   };
 
+  const handlePaperClick = (paperId: string) => {
+    // Clear filters to show all papers
+    setSearchQuery('');
+    setSelectedTags([]);
+    setSelectedStatus(null);
+
+    // Scroll to the paper after a short delay (to let filters clear)
+    setTimeout(() => {
+      const paperElement = paperRefs.current.get(paperId);
+      if (paperElement) {
+        paperElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Add a brief highlight effect
+        paperElement.classList.add('ring-2', 'ring-blue-400');
+        setTimeout(() => {
+          paperElement.classList.remove('ring-2', 'ring-blue-400');
+        }, 2000);
+      }
+    }, 100);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -154,6 +179,7 @@ function App() {
   }
 
   const currentSortLabel = sortOptions.find(opt => opt.value === sortBy)?.label || '';
+  const unreadCount = statusCounts['to-read'];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -176,6 +202,21 @@ function App() {
           <div className="flex-1 max-w-xl ml-auto">
             <SearchBar value={searchQuery} onChange={setSearchQuery} />
           </div>
+
+          {/* Recommend button */}
+          <button
+            onClick={() => setRecommendModalOpen(true)}
+            className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-medium rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-all shadow-sm"
+            title="今日の論文を推薦"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span className="hidden sm:inline">推薦</span>
+            {unreadCount > 0 && (
+              <span className="bg-white bg-opacity-30 px-1.5 py-0.5 rounded text-xs">
+                {unreadCount}
+              </span>
+            )}
+          </button>
         </div>
       </header>
 
@@ -240,11 +281,18 @@ function App() {
             {/* Paper cards */}
             <div className="space-y-4">
               {filteredPapers.map((paper) => (
-                <PaperCard
+                <div
                   key={paper.id}
-                  paper={paper}
-                  onTagClick={handleTagClick}
-                />
+                  ref={(el) => {
+                    if (el) paperRefs.current.set(paper.id, el);
+                  }}
+                  className="transition-all duration-300"
+                >
+                  <PaperCard
+                    paper={paper}
+                    onTagClick={handleTagClick}
+                  />
+                </div>
               ))}
 
               {filteredPapers.length === 0 && (
@@ -256,6 +304,14 @@ function App() {
           </div>
         </main>
       </div>
+
+      {/* Recommendation Modal */}
+      <RecommendationModal
+        isOpen={recommendModalOpen}
+        onClose={() => setRecommendModalOpen(false)}
+        papers={papers}
+        onPaperClick={handlePaperClick}
+      />
     </div>
   );
 }
